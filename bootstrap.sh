@@ -6,15 +6,14 @@
 #
 ####################################################################
 
-# wget -q -O - "https://raw.github.com/kwoods/workstation/master/bootstrap.sh" | tr -d '\r' | sudo bash
-# bash -xe <(curl -s https://raw.github.com/kwoods/workstation/master/bootstrap.sh)
+# bash -e <(curl -fsSL https://raw.githubusercontent.com/kwoods/workstation/master/bootstrap.sh)
 
 ####################################################################
 # Install Xcode Command Line Tools
 ####################################################################
 # https://github.com/timsutton/osx-vm-templates/blob/ce8df8a7468faa7c5312444ece1b977c1b2f77a4/scripts/xcode-cli-tools.sh
 if hash gcc 2>/dev/null; then
-  echo "Command Line Tools Confirmed"
+  echo "*- Command Line Tools Confirmed"
 else
   read -r -p "Install Xcode Command Line Tools? [y/N] " response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
@@ -35,7 +34,7 @@ fi
 read -r -p "Generate SSH Key & Add to GitHub? [y/N] " response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
 then
-  echo "GitHub email: "
+  echo "Enter GitHub email: "
   read email
   ssh-keygen -t rsa -b 4096 -C "$email"
   pbcopy < ~/.ssh/id_rsa.pub
@@ -47,7 +46,19 @@ then
   ssh -T git@github.com
 fi
 
-
+####################################################################
+# Clone Repo and run bundler
+####################################################################
+read -r -p "Sprout-Wrap? [y/N] " response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+  cd /tmp
+  git clone https://github.com/kwoods/sprout-wrap.git
+  cd sprout-wrap
+  sudo gem install bundler
+  bundle
+  caffeinate bundle exec soloist
+fi
 
 echo "Finished!"
 echo $'\360\237\215\273'

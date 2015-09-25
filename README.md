@@ -1,6 +1,4 @@
 # workstation
 Scripts for configuring dev workstation
 
-    bash -xe <(curl -s https://raw.github.com/kwoods/workstation/master/bootstrap.sh)
-
-    
+    bash -e <(curl -fsSL https://raw.githubusercontent.com/kwoods/workstation/master/bootstrap.sh)

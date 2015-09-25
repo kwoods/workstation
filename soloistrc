@@ -1,0 +1,7 @@
+recipes:
+
+# base (required by sprout)
+- sprout-base
+- sprout-base::bash_it
+- sprout-base::homebrew
+- sprout-homebrew
