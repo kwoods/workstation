@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 ####################################################################
 #
 # Initial OSX System Bootstrap for New Development Workstation
